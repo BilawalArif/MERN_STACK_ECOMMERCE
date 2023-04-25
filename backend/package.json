@@ -2,17 +2,12 @@
   "name": "mern-project",
   "version": "1.0.0",
   "description": "",
-  "main": "backend/server.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-<<<<<<< HEAD:backend/package.json
     "start": "node server.js",
-    "dev": "nodemon server.js"
-=======
-    "start": "node backend/server.js",
-    "dev": "nodemon backend/server.js",
+    "dev": "nodemon server.js",
     "build": "npm i"
->>>>>>> 51cd68d277ed6b95c33c56a855288dbfed6b62a8:package.json
   },
   "author": "Bilawal Arif",
   "license": "ISC",

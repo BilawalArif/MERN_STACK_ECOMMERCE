@@ -67,7 +67,7 @@ function App() {
     store.dispatch(loadUser());
 
     getStripeApiKey();
-  }, [getStripeApiKey]);
+  }, []);
 
   return (
     <Router>

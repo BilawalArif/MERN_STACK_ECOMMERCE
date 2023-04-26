@@ -30,7 +30,7 @@ import ProductList from "./component/Admin/ProductList.js";
 
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-
+import { useDispatch } from 'react-redux';
 import store from "./store";
 import { loadUser } from "./actions/userAction";
 import UserOptions from "./component/layout/Header/UserOptions.js";
@@ -45,9 +45,9 @@ import UpdateUser from "./component/Admin/UpdateUser";
 import ProductReviews from "./component/Admin/ProductReviews";
 
 function App() {
-  const BASE_URL = process.env.REACT_APP_BASE_URL;
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const [stripeApiKey, setStripeApiKey] = useState("");
+  const dispatch = useDispatch();
 
   async function getStripeApiKey() {
     const { data } = await axios.get(
@@ -57,7 +57,7 @@ function App() {
     setStripeApiKey(data.stripeApiKey);
   }
   useEffect(() => {
-    store.dispatch(loadUser());
+    dispatch(loadUser());
 
     getStripeApiKey();
   }, []);

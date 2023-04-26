@@ -45,14 +45,16 @@ import UpdateUser from "./component/Admin/UpdateUser";
 import ProductReviews from "./component/Admin/ProductReviews";
 
 function App() {
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const [stripeApiKey, setStripeApiKey] = useState("");
 
   async function getStripeApiKey() {
-    const { data } = await axios.get("/api/v1/stripeapikey");
+    const { data } = await axios.get(`${BASE_URL}/api/v1/stripeapikey`);
 
     setStripeApiKey(data.stripeApiKey);
-  }
+  } 
+  
 
   useEffect(() => {
     WebFont.load({
@@ -66,13 +68,11 @@ function App() {
     getStripeApiKey();
   }, []);
 
-  
   return (
     <Router>
       <Header />
       {isAuthenticated && <UserOptions user={user} />}
-      
-      
+
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/contact" element={Contact} />
@@ -89,14 +89,14 @@ function App() {
         {/* PROTECTED ROUTES */}
 
         <Route isAdmin={true} element={<ProtectedRoutes />}>
-        {stripeApiKey && (
+          {stripeApiKey && (
             <Route
               exact
               path="/process/payment"
               element={
                 <Elements stripe={loadStripe(stripeApiKey)}>
                   <Payment />
-                </Elements> 
+                </Elements>
               }
             />
           )}
@@ -110,8 +110,6 @@ function App() {
             <Route exact path="/order/:id" element={<OrderDetails />} />
             <Route exact path="/order/confirm" element={<ConfirmOrder />} />
           </Route>
-
-         
 
           {/* ADMIN ROUTES */}
           <Route exact path="/admin/dashboard" element={<Dashboard />} />

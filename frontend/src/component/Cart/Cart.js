@@ -3,7 +3,6 @@ import "./Cart.css";
 import CartItemCard from "./CartItemCard.js";
 import { useSelector, useDispatch } from "react-redux";
 import { addItemsToCart, removeItemsFromCart } from "../../actions/cartAction";
-import { loadUser } from "../../actions/userAction";
 import { useNavigate, Link } from "react-router-dom";
 import { Typography } from "@mui/material";
 import { MdRemoveShoppingCart } from "react-icons/md";
@@ -11,7 +10,6 @@ const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { cartItems } = useSelector((state) => state.cart);
-  const { isAuthenticated } = useSelector((state) => state.user);
 
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;

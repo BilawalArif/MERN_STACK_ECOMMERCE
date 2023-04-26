@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "./ProductCard.js";
 import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
-import axios from "axios";
 
 const Home = () => {
   const alert = useAlert();

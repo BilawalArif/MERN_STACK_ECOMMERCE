@@ -1,7 +1,7 @@
 import React, { Fragment, useRef, useState, useEffect } from "react";
 import { MdMailOutline } from "react-icons/md";
 import { BiFace, BiLockOpen } from "react-icons/bi";
-import { clearErrors, login, register, loadUser } from "../../actions/userAction";
+import { clearErrors, login, register } from "../../actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../layout/Loader/Loader";
 import { Link, useNavigate } from "react-router-dom";

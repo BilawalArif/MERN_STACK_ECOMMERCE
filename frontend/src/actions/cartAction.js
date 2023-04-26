@@ -4,10 +4,11 @@ import {
   SAVE_SHIPPING_INFO,
 } from "../constants/cartConstants";
 import axios from "axios";
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 /// ADD to Cart
 export const addItemsToCart = (id, quantity) => async (dispatch, getState) => {
-  const { data } = await axios.get(`/api/v1/product/${id}`);
+  const { data } = await axios.get(`${BASE_URL}/api/v1/product/${id}`);
 
   dispatch({
     type: ADD_TO_CART,
@@ -24,7 +25,7 @@ export const addItemsToCart = (id, quantity) => async (dispatch, getState) => {
   localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 };
 
-//Remoce from cart
+//Remove from cart
 
 export const removeItemsFromCart = (id) => async (dispatch, getState) => {
   dispatch({

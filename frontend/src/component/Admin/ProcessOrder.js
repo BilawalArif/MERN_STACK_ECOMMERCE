@@ -9,7 +9,6 @@ import {
   updateOrder,
 } from "../../actions/orderAction";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
@@ -22,7 +21,6 @@ const ProcessOrder = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const params = useParams();
-  const navigate = useNavigate();
 
   const [status, setStatus] = useState("");
 

@@ -79,7 +79,7 @@ export const loadUser = () => async (dispatch) => {
   try {
     dispatch({ type: LOAD_REQUEST });
 
-    const { data } = await axios.get(`${BASE_URL}/api/v1/me`);
+    const { data } = await axios.get(`https://mern-stack-ecommerce-ahfo.onrender.com/api/v1/me`);
 
     dispatch({ type: LOAD_SUCCESS, payload: data.user });
   } catch (error) {

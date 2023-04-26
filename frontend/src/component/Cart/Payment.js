@@ -60,7 +60,7 @@ const Payment = () => {
         },
       };
       const { data } = await axios.post(
-        "/api/v1/payment/process",
+        "https://mern-stack-ecommerce-ahfo.onrender.com/api/v1/payment/process",
         paymentData,
         config
       );

@@ -56,6 +56,11 @@ function App() {
 
     setStripeApiKey(data.stripeApiKey);
   }
+  useEffect(() => {
+    store.dispatch(loadUser());
+
+    getStripeApiKey();
+  }, []);
 
   useEffect(() => {
     WebFont.load({
@@ -63,10 +68,6 @@ function App() {
         families: ["Roboto", "Droid Sans", "Chilanka"],
       },
     });
-
-    store.dispatch(loadUser());
-
-    getStripeApiKey();
   }, []);
 
   return (

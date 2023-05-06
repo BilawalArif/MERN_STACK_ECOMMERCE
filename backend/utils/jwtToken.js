@@ -11,7 +11,7 @@ const sendToken = (user, statusCode, res) => {
     ),
     httpOnly: true,
     domain: "https://mern-stack-ecommerce-ahfo.onrender.com",
-    path: "/api/v1/me",
+    path: "/",
   };
 
   res.status(statusCode).cookie("token", token, option).json({

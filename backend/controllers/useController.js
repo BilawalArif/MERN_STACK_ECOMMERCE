@@ -26,12 +26,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
       url: myCloud.secure_url,
     },
   });
-  if (res.data.success) {
-    localStorage.setItem("token", res.data.token);
-    // Continue with your application logic
-  } else {
-    console.log("Cannot save token");
-  }
+
   sendToken(user, 201, res);
 });
 
@@ -55,12 +50,7 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
   if (!isPasswordMatched) {
     return next(new ErrorHander("Invalid Email or Password", 401));
   }
-  if (res.data.success) {
-    localStorage.setItem("token", res.data.token);
-    // Continue with your application logic
-  } else {
-    console.log("Cannot save token");
-  }
+  
 
   sendToken(user, 200, res);
 });
@@ -160,12 +150,7 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 
 exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(req.user.id);
-  if (res.data.success) {
-    localStorage.setItem("token", res.data.token);
-    // Continue with your application logic
-  } else {
-    console.log("Cannot save token");
-  }
+
   res.status(200).json({
     success: true,
     user,

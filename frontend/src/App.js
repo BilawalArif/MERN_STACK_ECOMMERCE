@@ -30,7 +30,7 @@ import ProductList from "./component/Admin/ProductList.js";
 
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { useDispatch } from 'react-redux';
+
 import store from "./store";
 import { loadUser } from "./actions/userAction";
 import UserOptions from "./component/layout/Header/UserOptions.js";
@@ -47,7 +47,6 @@ import ProductReviews from "./component/Admin/ProductReviews";
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const [stripeApiKey, setStripeApiKey] = useState("");
-  const dispatch = useDispatch();
 
   async function getStripeApiKey() {
     const { data } = await axios.get(
@@ -56,11 +55,6 @@ function App() {
 
     setStripeApiKey(data.stripeApiKey);
   }
-  useEffect(() => {
-    dispatch(loadUser());
-
-    getStripeApiKey();
-  }, []);
 
   useEffect(() => {
     WebFont.load({
@@ -68,6 +62,10 @@ function App() {
         families: ["Roboto", "Droid Sans", "Chilanka"],
       },
     });
+
+    store.dispatch(loadUser());
+
+    getStripeApiKey();
   }, []);
 
   return (
@@ -90,7 +88,7 @@ function App() {
 
         {/* PROTECTED ROUTES */}
 
-        <Route isAdmin={true} element={<ProtectedRoutes />}>
+        <Route element={<ProtectedRoutes />}>
           {stripeApiKey && (
             <Route
               exact
@@ -114,15 +112,60 @@ function App() {
           </Route>
 
           {/* ADMIN ROUTES */}
-          <Route exact path="/admin/dashboard" element={<Dashboard />} />
-          <Route exact path="/admin/products" element={<ProductList />} />
-          <Route exact path="/admin/product" element={<NewProduct />} />
-          <Route exact path="/admin/product/:id" element={<UpdateProduct />} />
-          <Route exact path="/admin/orders" element={<OrderList />} />
-          <Route exact path="/admin/order/:id" element={<ProcessOrder />} />
-          <Route exact path="/admin/users" element={<UsersList />} />
-          <Route exact path="/admin/user/:id" element={<UpdateUser />} />
-          <Route exact path="/admin/reviews" element={<ProductReviews />} />
+          <Route
+            isAdmin={true}
+            exact
+            path="/admin/dashboard"
+            element={<Dashboard />}
+          />
+          <Route
+            isAdmin={true}
+            exact
+            path="/admin/products"
+            element={<ProductList />}
+          />
+          <Route
+            isAdmin={true}
+            exact
+            path="/admin/product"
+            element={<NewProduct />}
+          />
+          <Route
+            isAdmin={true}
+            exact
+            path="/admin/product/:id"
+            element={<UpdateProduct />}
+          />
+          <Route
+            isAdmin={true}
+            exact
+            path="/admin/orders"
+            element={<OrderList />}
+          />
+          <Route
+            isAdmin={true}
+            exact
+            path="/admin/order/:id"
+            element={<ProcessOrder />}
+          />
+          <Route
+            isAdmin={true}
+            exact
+            path="/admin/users"
+            element={<UsersList />}
+          />
+          <Route
+            isAdmin={true}
+            exact
+            path="/admin/user/:id"
+            element={<UpdateUser />}
+          />
+          <Route
+            isAdmin={true}
+            exact
+            path="/admin/reviews"
+            element={<ProductReviews />}
+          />
         </Route>
       </Routes>
       <Footer />

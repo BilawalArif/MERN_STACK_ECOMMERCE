@@ -9,7 +9,7 @@ const path = require("path");
 const cors = require("cors");
 //Config
 
-dotenv.config({ path: "backend/config/config.env" });
+dotenv.config({ path: "config/config.env" });
 
 app.use(cors());
 app.use(express.json());

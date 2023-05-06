@@ -50,9 +50,6 @@ export const login = (email, password) => async (dispatch) => {
       { email, password },
       config
     );
-    if (response.data.success) {
-      localStorage.setItem('token', response.data.token);
-    }
 
     dispatch({ type: LOGIN_SUCCESS, payload: data.user });
   } catch (error) {
@@ -72,15 +69,13 @@ export const register = (userData) => async (dispatch) => {
       userData,
       config
     );
-    if (response.data.success) {
-      localStorage.setItem('token', response.data.token);
-    }
+
     dispatch({ type: REGISTER_SUCCESS, payload: data.user });
-  } catch (error) {
+  } 
+  catch (error) {
     dispatch({ type: REGISTER_FAIL, payload: error.response.data.message });
   }
 };
-
 
 
 //Load User
@@ -91,10 +86,6 @@ export const loadUser = () => async (dispatch) => {
     const { data } = await axios.get(
       `https://mern-stack-ecommerce-ahfo.onrender.com/api/v1/me`
     );
-
-    if (response.data.success) {
-      localStorage.setItem('token', response.data.token);
-    }
 
     dispatch({ type: LOAD_SUCCESS, payload: data.user });
     console.log(data.user)

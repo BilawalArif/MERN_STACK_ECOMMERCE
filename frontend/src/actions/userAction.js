@@ -71,12 +71,10 @@ export const register = (userData) => async (dispatch) => {
     );
 
     dispatch({ type: REGISTER_SUCCESS, payload: data.user });
-  } 
-  catch (error) {
+  } catch (error) {
     dispatch({ type: REGISTER_FAIL, payload: error.response.data.message });
   }
 };
-
 
 //Load User
 export const loadUser = () => async (dispatch) => {

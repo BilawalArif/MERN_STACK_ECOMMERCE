@@ -4,23 +4,15 @@ const sendToken = (user, statusCode, res) => {
   const token = user.getJWTToken();
 
   //options for cookies
-  axios.post('https://mern-stack-ecommerce-ahfo.onrender.com/api/v1/login', {
-    // Your request payload
-  })
-    .then((res) => {
-      if (res.data.success) {
-        localStorage.setItem("token", res.data.token);
-        // Continue with your application logic
-      } else {
-        console.log("Cannot save token");
-      }
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
- 
 
-  res.status(statusCode).json({
+  const option = {
+    expires: new Date(
+      Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true,
+  };
+
+  res.status(statusCode).cookie("token", token, option).json({
     success: true,
     user,
     token,
